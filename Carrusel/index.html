@@ -38,6 +38,30 @@
 		$('#datos').css('display', 'none');
 	  });
 	  
+	  $('#guardar').on('click', function() {
+	    $('#datos').css('display', 'block');
+		
+		galeria[actual].persona = $("#persona_d").html();
+		galeria[actual].frase   = $("#frase_d").html();
+		galeria[actual].foto    = $("#foto_d").html();
+		
+		select(actual);
+		
+		$('#datos').css('display', 'none');
+	  });
+	  
+	  $('#borrar').on('click', function() {
+	    galeria.splice(actual, 1);
+		
+		generar_selector();
+		
+		if (galeria.length > 0) {
+		  select(0);
+		} 		
+		
+		$('#datos').css('display', 'none');
+	  });
+	  
 	  select(0);
 	});
 	
