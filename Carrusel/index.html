@@ -15,14 +15,25 @@
 	  $('#editar').on('click', function() {
 	    clearTimeout(t);
 		
-		$('persona_d').html(galeria[actual].persona);
-		$('frase_d').html(galeria[actual].frase);
-		$('foto_d').html(galeria[actual].foto);
+		$('#persona_d').html(galeria[actual].persona);
+		$('#frase_d').html(galeria[actual].frase);
+		$('#foto_d').html(galeria[actual].foto);
 		
-		$('datos').css('display', 'block');
+		$('#datos').css('display', 'block');
 	  });
 	  
 	  $('#nuevo').on('click', function() {
+	    $('#datos').css('display', 'block');
+		
+		actual = galeria.push({
+		   persona:$("#persona_d").html(),
+		   frase:$("#frase_d").html(),
+		   foto:$("#foto_d").html()
+		}) - 1;
+
+		generar_selector();
+
+		select(actual);
 	  });
 	  
 	  select(0);
@@ -62,7 +73,7 @@
 	  </div>
 	</section>  
 	<div class="editar" id="editar">
-      <img src="images/carat-d-white.svg" alt="">
+      <img src="images/carat-d-white.svg" alt="" title="Editar Slider">
     </div>
 	<section id="datos">
 	  <div contenteditable="true" id="persona_d"></div>
@@ -70,9 +81,9 @@
 	  <div contenteditable="true" id="foto_d"></div>
 	  <div id="botones">
 	    <ul>
-		  <li><img src="images/edit-black.svg" id="guardar"></li>
-		  <li><img src="images/plus-black.svg" id="nuevo"></li>
-		  <li><img src="images/delete-black.svg" id="borrar"></li>		  
+		  <li><img src="images/edit-black.svg" id="guardar" alt="Guardar Slider" title="Guardar Slider"></li>
+		  <li><img src="images/plus-black.svg" id="nuevo" alt="Nuevo Slider" title="Nuevo Slider"></li>
+		  <li><img src="images/delete-black.svg" id="borrar" alt="Borrar Slider" title="Borrar Slider"></li>		  
 		</ul>
 	  </div>
 	</section>
