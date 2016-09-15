@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Carrusel</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="js/main.js"></script>
+  <link rel="stylesheet" href="css/main.css">
+  <script>
+    var t, actual;
+	
+	$(function() {	  
+	  generar_selector();
+	  
+	  $('#editar').on('click', function() {
+	    clearTimeout(t);
+		
+		$('persona_d').html(galeria[actual].persona);
+		$('frase_d').html(galeria[actual].frase);
+		$('foto_d').html(galeria[actual].foto);
+		
+		$('datos').css('display', 'block');
+	  });
+	  
+	  $('#nuevo').on('click', function() {
+	  });
+	  
+	  select(0);
+	});
+	
+	function generar_selector() {
+	  var selector = $('ul#selector');
+	  selector.html('');
+	  galeria.forEach(function(elem, i) {
+	    selector.append("<li><a onClick='select(" + i + ")'></a></li>");
+	  });
+	}
+	
+	function select(i) {
+	  actual = i;
+	  
+	  $('nav a').removeClass("on off").addClass(function(j) { return (j === i)?'on':'off';});
+      $('#persona').html(galeria[i].persona);
+	  $('#frase').html(galeria[i].frase);
+	  $('#foto').attr('src', galeria[i].foto);
+	  
+	  clearTimeout(t);
+	  t = setTimeout(function() {select((i + 1) % galeria.length);}, 2000);
+	}
+  </script>
+</head>
+<body>
+  <div class="contenido">
+    <nav>
+      <ul id="selector"></ul>
+    </nav>    
+	<section id="caja">
+	  <img id="foto" alt="" />
+	  <div class="textos">
+	    <p id="frase"></p>
+		<p id="persona"></p>
+	  </div>
+	</section>  
+	<div class="editar" id="editar">
+      <img src="images/carat-d-white.svg" alt="">
+    </div>
+	<section id="datos">
+	  <div contenteditable="true" id="persona_d"></div>
+	  <div contenteditable="true" id="frase_d"></div>
+	  <div contenteditable="true" id="foto_d"></div>
+	  <div id="botones">
+	    <ul>
+		  <li><img src="images/edit-black.svg" id="guardar"></li>
+		  <li><img src="images/plus-black.svg" id="nuevo"></li>
+		  <li><img src="images/delete-black.svg" id="borrar"></li>		  
+		</ul>
+	  </div>
+	</section>
+  </div> 
+</body>
+</html>

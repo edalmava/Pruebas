@@ -1,0 +1,38 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-document.html">
+<dom-module id="prueba-firebase-document">
+<template>
+<style>
+  :host {
+    display: block;
+  }
+</style>
+<h1>Hola Mundo</h1>
+<firebase-app
+  name="polymerfire"
+  api-key="AIzaSyAm5FTRGW9dqgr04KxypkAmvfevCSPb5C8"
+  auth-domain="michat-637ad.firebaseapp.com"
+  database-url="https://michat-637ad.firebaseio.com">
+</firebase-app> 
+<firebase-document
+  app-name="polymerfire"
+  path="/mensajes"
+  data="{{misdatos}}">
+</firebase-document>
+<p>Nombres: [[misdatos.nombre]]<br>Apellidos: [[misdatos.apellido]]</p>
+<button on-tap="cambiaApp">Cambiar Nombres a Pepito y apellidos a Perez</button>
+</template>
+<script>
+  Polymer({
+    is: "prueba-firebase-document",
+	properties: {
+	  misdatos: Object
+	},
+	cambiaApp: function() {
+	  this.set('misdatos.nombre', 'Pepito');
+	  this.set('misdatos.apellido', 'Perez');
+	}
+  });
+</script>
+</dom-module>
